@@ -1,16 +1,45 @@
+# VM SH -recruitment task
+## How to up dev environment
+
+```
 ./vendor/bin/sail up
+```
+
+## How to migrate db
+```
 ./vendor/bin/sail artisan migrate
+```
 
+## How to seed db
+```
 ./vendor/bin/sail artisan db:seed --class=MyShopSeeder
+```
 
----------------------------------------------------------------
+## How to up tests
+```
+./vendor/bin/sail artisan test
+```
+
+## Task endpoints 
+```
+http://localhost:86/shop-users-with-last-purchase-date
+http://localhost:86/shop-users-sorted-by-birthdate
+http://localhost:86/shop-users-with-birthday-in-current-week
+```
+
+## Questions for task 3a:
+```
+Pobierz listę użytkowników sortując ich wg daty urodzin (nie według daty
+urodzenia)
+-  jak się ma data urodzin do daty urodzenia, -> czy to są różne znaczenia ? czy błąd w zadaniu ?
+```
+
+
+### other useful commands
+```
 ./vendor/bin/sail artisan migrate:fresh
 ./vendor/bin/sail artisan db:seed --class=ShopUserEdgecasesSeeder
-----------------------------------------------------------------
-./vendor/bin/sail artisan test
-
-
-
+```
 
 
 
