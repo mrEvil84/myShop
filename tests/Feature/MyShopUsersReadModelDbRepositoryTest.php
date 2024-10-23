@@ -53,8 +53,6 @@ class MyShopUsersReadModelDbRepositoryTest extends TestCase
         $sut = new MyShopUsersReadModelDbRepository();
         $shopUsers = $sut->getShopUsersSortedByBirthDate();
 
-
-
         $this->assertEquals(12, $shopUsers->first()->id);
         $this->assertEquals(11, $shopUsers->last()->id);
     }

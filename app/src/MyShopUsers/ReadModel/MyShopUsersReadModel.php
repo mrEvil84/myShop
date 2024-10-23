@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 namespace App\src\MyShopUsers\ReadModel;
+
 use App\Models\ShopUser;
 use Illuminate\Database\Eloquent\Collection;
 
-class MyShopUsersReadModel
+readonly class MyShopUsersReadModel
 {
-    public function __construct(private readonly MyShopUsersReadModelRepository $repository) {
+    public function __construct(private MyShopUsersReadModelRepository $repository)
+    {
     }
 
     /**

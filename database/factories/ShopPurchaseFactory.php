@@ -6,7 +6,7 @@ use App\Models\ShopPurchase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ShopPurchase>
+ * @extends Factory<ShopPurchase>
  */
 class ShopPurchaseFactory extends Factory
 {
