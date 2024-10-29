@@ -39,6 +39,11 @@ urodzenia)
 ```
 ./vendor/bin/sail artisan migrate:fresh
 ./vendor/bin/sail artisan db:seed --class=ShopUserEdgecasesSeeder
+
+-- code analysis
+
+ ./vendor/bin/phpstan analyse ./app/src/ --level=1
+
 ```
 
 

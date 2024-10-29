@@ -10,8 +10,8 @@
 
             @foreach($users as $user)
                 <tr>
-                    <td>{{$user->id}}</td>
-                    <td>{{ Carbon\Carbon::parse($user->getLastPurchaseDate())->format('Y-m-d') }}</td>
+                    <td>{{$user->shop_user_id}}</td>
+                    <td>{{ Carbon\Carbon::parse($user->last_purchase_date)->format('Y-m-d') }}</td>
                 </tr>
             @endforeach
 

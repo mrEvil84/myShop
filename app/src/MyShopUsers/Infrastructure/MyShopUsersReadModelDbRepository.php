@@ -1,29 +1,67 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\src\MyShopUsers\Infrastructure;
 
-use App\Models\ShopUser;
 use App\src\MyShopUsers\ReadModel\MyShopUsersReadModelRepository;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\ConnectionInterface;
 
-class MyShopUsersReadModelDbRepository implements MyShopUsersReadModelRepository
+readonly class MyShopUsersReadModelDbRepository implements MyShopUsersReadModelRepository
 {
-    public function getAllShopUsers(): Collection
+    public function __construct(private ConnectionInterface $db)
     {
-        return ShopUser::all();
     }
 
-    public function getShopUsersSortedByBirthDate(): Collection
+    public function findUsersWithLastPurchaseDate(): array
     {
-        return ShopUser::all()->sortBy('birth_date', SORT_REGULAR, true);
+        $sql = '
+            SELECT
+                shop_user_id AS shop_user_id,
+                MAX(purchase_date) AS last_purchase_date
+            FROM
+                shop_purchases
+            GROUP BY
+                shop_user_id;
+        ';
+
+        return $this->db->select($sql);
     }
 
-    public function getShopUsersWithBirthdayInCurrentWeek(): Collection
+
+    public function getShopUsersSortedByBirthDate(): array
     {
-        return ShopUser::whereMonth('birth_date', '=', Carbon::now()->month)
-            ->whereDay('birth_date', '>=', Carbon::now()->startOfWeek())
-            ->whereDay('birth_date', '<=', Carbon::now()->endOfWeek())
-            ->get();
+        $sql = '
+            SELECT
+                sp.id AS shop_user_id,
+                sp.birth_date AS birth_date,
+                MONTH(sp.birth_date) AS month,
+                DAY(sp.birth_date) AS day
+            FROM
+                shop_users AS sp
+            ORDER BY
+                MONTH(sp.birth_date) DESC, DAY(sp.birth_date) DESC;
+        ';
+
+        return $this->db->select($sql);
+    }
+
+    public function getShopUsersWithBirthdayInCurrentWeek(): array
+    {
+        $sql = '
+            SELECT
+                sp.id AS shop_user_id,
+                sp.birth_date AS birth_date
+            FROM
+                shop_users AS sp
+            WHERE
+                MONTH(sp.birth_date) = MONTH(CURRENT_TIMESTAMP)
+                AND
+                    DAY(sp.birth_date) >= DAY(DATE(CURRENT_TIMESTAMP + INTERVAL (1 - WEEKDAY(CURRENT_TIMESTAMP)-1) DAY))
+                AND
+                    DAY(sp.birth_date) <= DAY(DATE(CURRENT_TIMESTAMP + INTERVAL (7- WEEKDAY(CURRENT_TIMESTAMP)-1) DAY));
+        ';
+
+        return $this->db->select($sql);
     }
 }

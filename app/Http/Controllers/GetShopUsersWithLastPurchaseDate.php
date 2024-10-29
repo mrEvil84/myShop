@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\src\MyShopUsers\ReadModel\MyShopUsersReadModel;
+use Illuminate\Contracts\View\View as ViewResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -14,7 +15,7 @@ class GetShopUsersWithLastPurchaseDate extends Controller
     {
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): ViewResponse
     {
         $users = $this->myShopUsersReadModel->getUsersWithLatestPurchases();
 

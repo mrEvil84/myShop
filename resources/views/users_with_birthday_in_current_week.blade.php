@@ -10,7 +10,7 @@
 
             @foreach($users as $user)
                <tr>
-                    <td>{{$user->id}}</td>
+                    <td>{{$user->shop_user_id}}</td>
                     <td>{{ Carbon\Carbon::parse($user->birth_date)->format('Y-m-d') }}</td>
               </tr>
             @endforeach
