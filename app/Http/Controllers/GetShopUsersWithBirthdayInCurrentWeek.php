@@ -9,9 +9,9 @@ use Illuminate\Contracts\View\View as ViewResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class GetShopUsersWithBirthdayInCurrentWeek extends Controller
+readonly class GetShopUsersWithBirthdayInCurrentWeek
 {
-    public function __construct(private readonly MyShopUsersReadModel $myShopUsersReadModel)
+    public function __construct(private MyShopUsersReadModel $myShopUsersReadModel)
     {
     }
 
