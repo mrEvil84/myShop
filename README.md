@@ -37,12 +37,19 @@ urodzenia)
 
 ### other useful commands
 ```
-./vendor/bin/sail artisan migrate:fresh
-./vendor/bin/sail artisan db:seed --class=ShopUserEdgecasesSeeder
+    ./vendor/bin/sail artisan migrate:fresh
+    ./vendor/bin/sail artisan db:seed --class=ShopUserEdgecasesSeeder
+
+-- env rebuild 
+
+    ./vendor/bin/sail down
+    ./vendor/bin/sail build --no-cache
+    ./vendor/bin/sail up -d
+
 
 -- code analysis
 
- ./vendor/bin/phpstan analyse ./app/src/ --level=1
+    ./vendor/bin/phpstan analyse ./app/src/ --level=1
 
 ```
 
